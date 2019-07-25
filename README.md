@@ -1,4 +1,4 @@
-# TCP-Socket-connection-SQLite-DB
+# UDP-Socket-connection-SQLite-DB
 
 Client:
 Client side connects to file witch saves data of station (ID and detector state 0\empty or 1\full)

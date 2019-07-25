@@ -51,7 +51,7 @@ def first_detector_saver():
                     fileST1.write('\n')
                     fileST1.write(str(detector2))
                     print("the data is saved!")
-             except(FileNotFoundError):
+            except(FileNotFoundError):
                 print("File not found")
         else:
             print("the digit should be 1 or 0 only!")

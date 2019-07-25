@@ -9,26 +9,30 @@ from time import gmtime, strftime
 currentTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
 # load file of station data ------------------------------------------------------------
-fileST1 = open("ST1.txt", "r")
-st1ID = fileST1.readline()  # ID of station
-detector1 = fileST1.readline()  # first water detector (1 - full, 0 - empty)
-detector2 = fileST1.readline()  # second water detector (1 - full, 0 - empty)
-fileST1.close()
-
+try:
+    fileST1 = open("ST1.txt", "r")
+    st1ID = fileST1.readline()  # ID of station
+    detector1 = fileST1.readline()  # first water detector (1 - full, 0 - empty)
+    detector2 = fileST1.readline()  # second water detector (1 - full, 0 - empty)
+    fileST1.close()
+except(FileNotFoundError):
+    print("File not found")
 
 # the func is loading current data on client side--------------------------------------
 def load_func():
     global st1ID, detector1, detector2, currentTime
-    with open("ST1.txt", "r") as fileST1:
-        st1ID = fileST1.readline()  # ID of station
-        detector1 = fileST1.readline()  # first water detector (1 - full, 0 - empty)
-        detector2 = fileST1.readline()  # second water detector (1 - full, 0 - empty)
-        currentTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        print("date is:", currentTime)
-        print("ID station: ", st1ID)
-        print("first detector: ", detector1)
-        print("second detector: ", detector2)
-
+    try:
+        with open("ST1.txt", "r") as fileST1:
+            st1ID = fileST1.readline()  # ID of station
+            detector1 = fileST1.readline()  # first water detector (1 - full, 0 - empty)
+            detector2 = fileST1.readline()  # second water detector (1 - full, 0 - empty)
+            currentTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+            print("date is:", currentTime)
+            print("ID station: ", st1ID)
+            print("first detector: ", detector1)
+            print("second detector: ", detector2)
+    except(FileNotFoundError):
+        print("File not found")
 
 # the func change status of first detector --------------------------------------------
 def first_detector_saver():
@@ -39,13 +43,16 @@ def first_detector_saver():
         print("please enter only 0 for empty or 1 for full")
     else:
         if detector1 == 1 or detector1 == 0:
-            with open("ST1.txt", "w") as fileST1:
-                fileST1.write(str(st1ID))
-                # fileST1.write('\n')
-                fileST1.write(str(detector1))
-                fileST1.write('\n')
-                fileST1.write(str(detector2))
-                print("the data is saved!")
+            try:
+                with open("ST1.txt", "w") as fileST1:
+                    fileST1.write(str(st1ID))
+                    # fileST1.write('\n')
+                    fileST1.write(str(detector1))
+                    fileST1.write('\n')
+                    fileST1.write(str(detector2))
+                    print("the data is saved!")
+             except(FileNotFoundError):
+                print("File not found")
         else:
             print("the digit should be 1 or 0 only!")
 
